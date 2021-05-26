@@ -17,14 +17,8 @@ class AuthController extends Controller
     public function signin(SigninRequest $request){
     	try{        
     		throw_if(!auth()->attempt($request->validated()),new \Exception('Email Atau Password Salah',422));   
-
-    		return redirect(auth()->user()->role == 'admin' ? '/admin' : '/user')
-                ->with([
-                    "fallback" => [
-                        "status" => "success",
-                        "message" => "Berhasil Login"
-                    ]
-                ]);		
+            
+            return HelperGlobal::success(["r" => auth()->user()->role == 'admin' ? '/admin' : '/user',"m" => "Berhasil Login"]);                
     	}catch(\Exception $e){      
     		return HelperGlobal::failed($e);
     	}
@@ -38,13 +32,7 @@ class AuthController extends Controller
 
             DB::commit();
             
-            return redirect('/signin')
-                ->with([
-                    "fallback" => [
-                        "status" => "success",
-                        "message" => "Berhasil Daftar"
-                    ]
-                ]); 
+            return HelperGlobal::success(["r" => "/signin","m" => "Berhasil Daftar"]);            
         }catch(\Exception $e){
             DB::rollback();
 
@@ -53,14 +41,12 @@ class AuthController extends Controller
     }
 
     public function logout(){
-        auth()->logout();
+        try{
+            auth()->logout();
 
-        return redirect('/signin')
-            ->with([
-                "fallback" => [
-                    "status" => "success",
-                    "message" => "Berhasil Logout"
-                ]
-            ]);
+            return HelperGlobal::success(["r" => "/signin","m" => "Berhasil Logout"]);            
+        }catch(\Exception $e){
+            return HelperGlobal::failed($e);
+        }
     }
 }
