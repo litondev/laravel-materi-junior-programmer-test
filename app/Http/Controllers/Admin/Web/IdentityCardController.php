@@ -83,9 +83,12 @@ class IdentityCardController extends Controller
 
 
     public function export(Request $request){             
-        $data = $request->all();
-        $data["count"] = IdentityCardExport::getCount();
-        $data["export_url"] = route('admin.action.identity-card.export')."?".$request->getQueryString();
+        $data = array(
+            "region" => $request->region,
+            "name" => $request->name,
+            "count" => IdentityCardExport::getCount(),
+            "export_url" => route('admin.action.identity-card.export')."?".$request->getQueryString()
+        );
 
         return view('admin.identity-card.export',$data);
     }
