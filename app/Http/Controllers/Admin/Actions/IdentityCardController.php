@@ -8,7 +8,12 @@ use DB;
 use App\Models\IdentityCard;
 use App\Helpers\HelperGlobal;
 use App\Http\Requests\Admin\IdentityCardRequest;
+use App\Http\Requests\IdentityCardImportRequest;
 use App\Uploads\Admin\IdentityCardPhoto;
+use App\Uploads\IdentityCardImport as IdentityCardImportFile;
+use App\Exports\IdentityCardExport;
+use App\Imports\IdentityCardImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IdentityCardController extends Controller
 {
@@ -109,6 +114,37 @@ class IdentityCardController extends Controller
         	DB::rollback();
 
     		return HelperGlobal::failed($e);
+        }
+    }
+
+    public function export(Request $request){
+        try{
+            $identityCard = IdentityCard::query()
+                ->select('nik','name','born_at','birth','gender','blood_type','region','is_married','jobs','nationality','valid_until','age');
+
+            if($request->filled('name')){
+                $identityCard->where('name',$request->name);
+            }
+
+            if($request->filled('region')){
+                $identityCard->where('region',$request->region);
+            }
+
+            return Excel::download(new IdentityCardExport($identityCard->get()), 'identityCard.xlsx');
+        }catch(\Exception $e){
+            return HelperGlobal::failed($e);
+        }
+    }
+
+    public function import(IdentityCardImportRequest $request){
+        try{    
+            $name = IdentityCardImportFile::upload();
+
+            Excel::import(new IdentityCardImport, public_path('/assets/imports/'.$name));
+
+            return HelperGlobal::success(["r" => "back","m" => "Berhasil Mengimport Data"]);                    
+        }catch(\Exception $e){
+            return HelperGlobal::failed($e);
         }
     }
 }

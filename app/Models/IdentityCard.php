@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class IdentityCard extends Model
 {
-    protected $guarded = [];
+    protected $guarded = ['id'];
     
     public function address(){
     	return $this->hasOne(Address::class);

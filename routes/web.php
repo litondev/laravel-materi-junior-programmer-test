@@ -35,6 +35,8 @@ Route::group(["middleware" => "isAdmin","prefix" => "admin","as" => "admin."],fu
 	});
 
 	Route::group(["namespace" => "Admin\Actions","as" => "action."],function(){
+		Route::get('/action/identity-card/export','IdentityCardController@export')->name('identity-card.export');
+		Route::post('/action/identity-card/import','IdentityCardController@import')->name('identity-card.import');
 		Route::apiResource('/identity-card','IdentityCardController')->only('destroy','update','store');
 	});
 });
@@ -46,7 +48,8 @@ Route::group(["middleware" => "isLogin","prefix" => "user"],function(){
 		Route::resource('/identity-card','IdentityCardController')->only('index','show');
 	});
 
-	Route::group(["namespace" => "User\Actions"],function(){
-		Route::get("/logout","AuthController@logout")->name("action.logout");
+	Route::group(["namespace" => "User\Actions","as" => "action."],function(){
+		Route::get('/action/identity-card/export','IdentityCardController@export')->name('identity-card.export');
+		Route::get("/logout","AuthController@logout")->name("logout");
 	});
 });

@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
     
     protected $hidden = [
         'password',

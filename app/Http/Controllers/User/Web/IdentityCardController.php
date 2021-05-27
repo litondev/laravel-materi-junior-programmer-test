@@ -51,7 +51,22 @@ class IdentityCardController extends Controller
         return view('user.identity-card.show',compact('identity_card'));
     }
 
-    public function export(Request $reqest){
-        echo "hai";
+     public function export(Request $request){       
+        $identityCard = IdentityCard::query()
+            ->selectId();
+
+        if($request->filled('name')){
+            $identityCard->where('name',$request->name);
+        }
+
+        if($request->filled('region')){
+            $identityCard->where('region',$request->region);
+        }
+
+        $data = $request->all();
+        $data["count"] = $identityCard->count();
+        $data["export_url"] = route('action.identity-card.export')."?".$request->getQueryString();
+
+        return view('user.identity-card.export',$data);
     }
 }

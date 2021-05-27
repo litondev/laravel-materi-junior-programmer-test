@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserLog extends Model
 {
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function users(){
     	return $this->belongsMany(User::class);
