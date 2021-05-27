@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\IdentityCard;
+use App\Exports\IdentityCardExport;
 
 class IdentityCardController extends Controller
 {
@@ -51,20 +52,9 @@ class IdentityCardController extends Controller
         return view('user.identity-card.show',compact('identity_card'));
     }
 
-     public function export(Request $request){       
-        $identityCard = IdentityCard::query()
-            ->selectId();
-
-        if($request->filled('name')){
-            $identityCard->where('name',$request->name);
-        }
-
-        if($request->filled('region')){
-            $identityCard->where('region',$request->region);
-        }
-
+     public function export(Request $request){      
         $data = $request->all();
-        $data["count"] = $identityCard->count();
+        $data["count"] = IdentityCardExport::getCount();
         $data["export_url"] = route('action.identity-card.export')."?".$request->getQueryString();
 
         return view('user.identity-card.export',$data);

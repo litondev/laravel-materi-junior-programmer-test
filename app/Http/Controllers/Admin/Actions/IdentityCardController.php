@@ -28,11 +28,8 @@ class IdentityCardController extends Controller
     {
         try{
             DB::beginTransaction();
-
-            $payload = $request->except('address','district','village','rt','rw','photo','is_valid_until');
-            $payload['photo'] = IdentityCardPhoto::upload();
-
-            $identityCard = IdentityCard::create($payload);
+        
+            $identityCard = IdentityCard::create($request->except('address','district','village','rt','rw','is_valid_until'));
 
             $identityCard->address()->create($request->only('address','district','village','rt','rw'));
 
@@ -59,14 +56,8 @@ class IdentityCardController extends Controller
             DB::beginTransaction();
 
             $oldPhoto = $identity_card->getRawOriginal('photo');
-
-            $payload = $request->except('address','district','village','rt','rw','photo','is_valid_until');
-            
-            if($request->has('photo')){
-                $payload['photo'] = IdentityCardPhoto::upload();
-            }
-
-            $identity_card->update($payload);
+        
+            $identity_card->update($request->except('address','district','village','rt','rw','is_valid_until'));
 
             $identity_card->address()->update($request->only('address','district','village','rt','rw'));
             
@@ -95,11 +86,11 @@ class IdentityCardController extends Controller
         	DB::beginTransaction();
 
         	$identity_card = IdentityCard::query()
-        		->selectId()
+        		->selectIdPhoto()
         		->withAddressId()
         		->findOrFail($identity_card);
 
-            // $oldPhoto = $identity_card->getRawOriginal('photo');
+            $oldPhoto = $identity_card->getRawOriginal('photo');
 
         	$identity_card->address()->delete();
 
@@ -107,7 +98,7 @@ class IdentityCardController extends Controller
 
         	DB::commit();
 
-            // IdentityCardPhoto::delete($oldPhoto);
+            IdentityCardPhoto::delete($oldPhoto);
 
             return HelperGlobal::success(["r" => "back","m" => "Berhasil Mengahapus Data"]);                    
         }catch(\Exception $e){
@@ -118,30 +109,16 @@ class IdentityCardController extends Controller
     }
 
     public function export(Request $request){
-        try{
-            $identityCard = IdentityCard::query()
-                ->select('nik','name','born_at','birth','gender','blood_type','region','is_married','jobs','nationality','valid_until','age');
-
-            if($request->filled('name')){
-                $identityCard->where('name',$request->name);
-            }
-
-            if($request->filled('region')){
-                $identityCard->where('region',$request->region);
-            }
-
-            return Excel::download(new IdentityCardExport($identityCard->get()), 'identityCard.xlsx');
+        try{          
+            return Excel::download(new IdentityCardExport(), 'identityCard.xlsx');
         }catch(\Exception $e){
             return HelperGlobal::failed($e);
         }
     }
 
     public function import(IdentityCardImportRequest $request){
-        try{    
-            $name = IdentityCardImportFile::upload();
-
-            Excel::import(new IdentityCardImport, public_path('/assets/imports/'.$name));
-
+        try{            
+            Excel::import(new IdentityCardImport, public_path('/assets/imports/'.IdentityCardImportFile::upload()));
             return HelperGlobal::success(["r" => "back","m" => "Berhasil Mengimport Data"]);                    
         }catch(\Exception $e){
             return HelperGlobal::failed($e);
