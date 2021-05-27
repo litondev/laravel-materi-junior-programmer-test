@@ -15,9 +15,7 @@ class IdentityCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-        $identityCard = IdentityCard::query()
-            ->selectDefault()
-            ->withAddress();
+        $identityCard = IdentityCard::selectDefault()->withAddress();
 
         if($request->filled('name')){
             $identityCard->where('name',$request->name);
@@ -48,12 +46,9 @@ class IdentityCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $nik = (IdentityCard::query()
-                ->selectNik()
-                ->orderBy('id','desc')
-                ->first()->nik + 1);
-
+    {        
+        $identity_card = IdentityCard::selectNik()->orderBy('id','desc')->first();
+        $nik = $identity_card ? ($identity_card->nik + 1) : 1;
         return view('admin.identity-card.form',compact('nik'));
     }
 
@@ -65,14 +60,9 @@ class IdentityCardController extends Controller
      */
     public function show($identity_card)
     {
-        $identity_card = IdentityCard::query()
-            ->with('address')
-            ->findOrFail($identity_card);
-
+        $identity_card = IdentityCard::with('address')->findOrFail($identity_card);
         return view('admin.identity-card.show',compact('identity_card'));
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
@@ -81,10 +71,10 @@ class IdentityCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($identity_card){
+        $identityCard = IdentityCard::with('address')->findOrFail($identity_card);
+
         $data = array(
-            "identity_card" => IdentityCard::query()
-                ->with('address')
-                ->findOrFail($identity_card),
+            "identity_card" => $identityCard,
             "id" => $identity_card
         );   
 

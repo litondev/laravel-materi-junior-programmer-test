@@ -20,10 +20,16 @@ class IdentityCardPhoto{
 	}
 
 	public static function delete($photo){
-		if($photo != "e-ktp.png"){            
-            if(file_exists(public_path() . "/assets/images/users/"."".$photo)){
-                unlink(public_path() . "/assets/images/users/"."".$photo);
-            }
-        } 
+		if($photo == "e-ktp.png"){            
+            return false;
+        }
+
+        if(!file_exists(public_path() . "/assets/images/users/"."".$photo)){
+            return false;
+        }
+
+        unlink(public_path() . "/assets/images/users/"."".$photo);                
+        
+        return true;
 	}
 }

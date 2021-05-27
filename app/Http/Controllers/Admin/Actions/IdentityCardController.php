@@ -63,7 +63,7 @@ class IdentityCardController extends Controller
             
             DB::commit();
 
-            IdentityCardPhoto::delete($oldPhoto);
+            $request->has('photo') ? IdentityCardPhoto::delete($oldPhoto) : '';
 
             return HelperGlobal::success(["r" => "admin/identity-card","m" => "Berhasil Mengubah Data"]);                    
         }catch(\Exception $e){
@@ -85,10 +85,7 @@ class IdentityCardController extends Controller
         try{
         	DB::beginTransaction();
 
-        	$identity_card = IdentityCard::query()
-        		->selectIdPhoto()
-        		->withAddressId()
-        		->findOrFail($identity_card);
+        	$identity_card = IdentityCard::selectIdPhoto()->withAddressId()->findOrFail($identity_card);
 
             $oldPhoto = $identity_card->getRawOriginal('photo');
 

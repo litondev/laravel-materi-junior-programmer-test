@@ -10,9 +10,7 @@ use App\Exports\IdentityCardExport;
 class IdentityCardController extends Controller
 {
     public function index(Request $request){
-        $identityCard = IdentityCard::query()
-            ->selectDefault()
-            ->withAddress();
+        $identityCard = IdentityCard::selectDefault()->withAddress();
 
         if($request->filled('name')){
             $identityCard->where('name',$request->name);
@@ -45,10 +43,7 @@ class IdentityCardController extends Controller
      */
     public function show($identity_card)
     {
-        $identity_card = IdentityCard::query()
-            ->with('address')
-            ->findOrFail($identity_card);
-
+        $identity_card = IdentityCard::with('address')->findOrFail($identity_card);
         return view('user.identity-card.show',compact('identity_card'));
     }
 
