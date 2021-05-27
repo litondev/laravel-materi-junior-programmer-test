@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
     	for($i=0;$i<10;$i++){
     		$identityCard = IdentityCard::create([
     			"name" => "user".$i,
-    			"nik" => rand(0000000000000000,99999999999999),
+    			"nik" => rand(1000000000000000,99999999999999),
     			"born_at" => "SRAGEN",
     			"birth" => "2001-09-09",
     			"region" => "ISLAM",    			
