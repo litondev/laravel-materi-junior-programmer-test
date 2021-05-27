@@ -13,9 +13,7 @@ class HelperGlobal {
 	}
 
 	public static function failed($e){
-		if($e->getCode() != 422){
-			HelperGlobal::log($e->getMessage());
-		}
+		$e->getCode() != 422 ? HelperGlobal::log($e->getMessage()) : '';		
 		
 		return back()
 		->withInput()
