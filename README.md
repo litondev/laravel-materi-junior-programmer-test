@@ -2,12 +2,12 @@
 
 <b>About :</b>
 <p>
-   This repository is my interview job junior programmer test
+   This repository is my test junior programmer
 </p>
     
 <b>Purpose :</b>
 <p>
-    I make this repsitory for my interview job junior programmer
+    I make this repsitory for my job junior programmer
 </p>
 
 <b>Requirement : </b>
@@ -35,10 +35,7 @@
     </li>
     <li>
         And then run command <b>composer install</b> insaide laravel root folder CLI or if you see composer.json file that mean that folder is laravel root folder :)
-    </li>    
-    <li>
-        Next Step Migration And Seeder
-    </li>
+    </li>      
 </ul>
     
 <b>Migration And Seeder :</b>
@@ -54,16 +51,24 @@
 
 <b>Account Demo :</b>
 <p>
-    For account demo you can seee in seeeder file
+    For account demo you can seee in seeder file
 </p>
     
 <b>Fiture : </b>
 <p>
    User Fiture : 
    <ul>
-       <li>Login And Registr</li>
+       <li>Login And Register</li>
        <li>See ktp data and Export the data</li>    
    </ul>
+</p>
+<p>
+    Admin Fiture :
+    <ul>
+        <li>Login</li>
+        <li>Crud ktp data</li>
+        <li>Export and import ktp data</li>
+    </ul>
 </p>
 
 <!--
