@@ -25,29 +25,49 @@
     <li>
         And then setting database section in .env file   
         <p>
-            DB_CONNECTION={YOUR_DATABASE_SERVER}<br/>
-            DB_HOST={YOUR_HOST_OR_IP}</br>
-            DB_PORT={YOUR_DATABASE_SERVER_PORT}</br>
-            DB_DATABASE={YOUR_DATABASE_NAME}</br>
-            DB_USERNAME={YOUR_USERNAME_DATABASE}</br>
-            DB_PASSWORD={YOUR_PASSWORD_DATABASE}
+            DB_CONNECTION=<b>{YOUR_DATABASE_SERVER}</b><br/>
+            DB_HOST=<b>{YOUR_HOST_OR_IP}</b></br>
+            DB_PORT=<b>{YOUR_DATABASE_SERVER_PORT}</b></br>
+            DB_DATABASE=<b>{YOUR_DATABASE_NAME}</b></br>
+            DB_USERNAME=<b>{YOUR_USERNAME_DATABASE}</b></br>
+            DB_PASSWORD=<b>{YOUR_PASSWORD_DATABASE}</b>
         </p>
     </li>
     <li>
-        And then run composer install insaide laravel root or if you see composer.json is that laravel root folder :)
+        And then run command <b>composer install</b> insaide laravel root folder CLI or if you see composer.json file that mean that folder is laravel root folder :)
     </li>    
+    <li>
+        Next Step Migration And Seeder
+    </li>
 </ul>
     
-<b>Migration :</b>
-
-<b>Seeder : </b>
-
+<b>Migration And Seeder :</b>
+<p>
+    Run command <b>php artisan migrate:fresh --seed </b> inside laravel root folder CLI</n
+</p>
+    
 <b>Run : </b>
+<p>
+    Run command <b>php artisan serve</b>  inside laravel root folder CLI
+    And then you can copy url in CLI screen to browser and enjoy it
+</p>
 
 <b>Account Demo :</b>
-
+<p>
+    For account demo you can seee in seeeder file
+</p>
+    
 <b>Fiture : </b>
+<p>
+   User Fiture : 
+   <ul>
+       <li>Login And Registr</li>
+       <li>See ktp data and Export the data</li>    
+   </ul>
+</p>
 
+<!--
 <b>Documentation :</b>
 
 <b>Production : </b>
+-->
