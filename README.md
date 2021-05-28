@@ -12,12 +12,12 @@
 
 <b>Requirement : </b>
 <ul>
-    <li>Php : </li>
+    <li>Php : ^7.2.x </li>
     <li>Mysql : </li>
-    <li>Composer : </li>
-    <li>Text Editor : </li>
+    <li>Composer :  ^2.0.x </li>
+    <li>Text Editor : (Sublime,VScode,and other) </li>
     <li>Phpmyadmin : </li>
-    <li>Laravel : </li>
+    <li>Laravel : 7 </li>
 </ul>
     
 <b>Install :</b>
