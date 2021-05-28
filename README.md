@@ -16,8 +16,6 @@
     <li>Mysql : </li>
     <li>Composer :  ^2.0.x </li>
     <li>Text Editor : (Sublime,VScode,and other) </li>
-    <li>Phpmyadmin : </li>
-    <li>Laravel : 7 </li>
 </ul>
     
 <b>Install :</b>
