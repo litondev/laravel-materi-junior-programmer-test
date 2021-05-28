@@ -13,7 +13,7 @@
 <b>Requirement : </b>
 <ul>
     <li>Php : ^7.2.x </li>
-    <li>Mysql : </li>
+    <li>Mysql/Mariadb Server :  10.4.x </li>
     <li>Composer :  ^2.0.x </li>
     <li>Text Editor : (Sublime,VScode,and other) </li>
 </ul>
