@@ -23,16 +23,19 @@
     <li>Make database whatever you want name it</li>
     <li>Copy .env.example to .env file</li>   
     <li>
-        And then setting database section in .env file
+        And then setting database section in .env file   
+        <p>
+            DB_CONNECTION={YOUR_DATABASE_SERVER}<br/>
+            DB_HOST={YOUR_HOST_OR_IP}</br>
+            DB_PORT={YOUR_DATABASE_SERVER_PORT}</br>
+            DB_DATABASE={YOUR_DATABASE_NAME}</br>
+            DB_USERNAME={YOUR_USERNAME_DATABASE}</br>
+            DB_PASSWORD={YOUR_PASSWORD_DATABASE}
+        </p>
     </li>
     <li>
-        <p>DB_CONNECTION={YOUR_DATABASE_SERVER}</p>
-        <p>DB_HOST={YOUR_HOST_OR_IP}</p>
-        <p>DB_PORT={YOUR_DATABASE_SERVER_PORT}</p>
-        <p>DB_DATABASE={YOUR_DATABASE_NAME}</p>
-        <p>DB_USERNAME={YOUR_USERNAME_DATABASE}</p>
-        <p>DB_PASSWORD={YOUR_PASSWORD_DATABASE}</p>
-    </li>
+        And then run composer install insaide laravel root or if you see composer.json is that laravel root folder :)
+    </li>    
 </ul>
     
 <b>Migration :</b>
