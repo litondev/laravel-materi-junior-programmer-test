@@ -49,6 +49,11 @@
     And then you can copy url in CLI screen to browser and enjoy it
 </p>
 
+<b> Role : </b>
+<p>
+    Role just Admin and User
+</p>
+    
 <b>Account Demo :</b>
 <p>
     For account demo you can seee in seeder file
